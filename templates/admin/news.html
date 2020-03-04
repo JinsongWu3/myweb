@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>News</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-theme.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='editormd/css/editormd.css') }}"/>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='txtfile.js') }}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    MAGUS <small>后台管理</small>
+                </h1>
+            </div>
+            <ul class="breadcrumb">
+                <li><a href="{{ url_for('.pic') }}">轮播图编辑</a></li>
+                <li><a href="{{ url_for('.member') }}">成员编辑</a></li>
+                <li><a href="{{ url_for('.news') }}">快讯编辑</a></li>
+                <li><a href="{{ url_for('.paper') }}">论文编辑</a></li>
+                <li><a href="{{ url_for('.patent') }}">专利编辑</a></li>
+                <li><a href="{{ url_for('.competition') }}">竞赛编辑</a></li>
+                <li><a href="{{ url_for('.partner') }}">合作方</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <form id="form_zh" method="post">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <h3 class="text-center">
+                        中文新闻编辑
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div id="zh-editormd">
+            <textarea name="news_zh" id="news_zh">{{ content_zh }}</textarea>
+        </div>
+        <label><input type="checkbox"/>确认修改</label>
+        <input form="#" type="submit" name="submit" value="提交修改" onclick=submit_txt("form_zh","/admin/pub/news_zh/")>
+        <input type="reset" name="reset" value="重置">
+    </form>
+    <form id="form_en" method="post">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <h3 class="text-center">
+                        英文新闻编辑
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div id="en-editormd">
+            <textarea name="news_en" id="news_en">{{ content_en }}</textarea>
+        </div>
+        <label><input type="checkbox"/>确认修改</label>
+        <input form="#" type="submit" name="submit" value="提交修改" onclick=submit_txt("form_en","/admin/pub/news_en/")>
+        <input type="reset" name="reset" value="重置">
+    </form>
+    <script type="text/javascript">
+        var testEditor;
+        $(function () {
+            testEditor = editormd("en-editormd", {
+                width: "100%",
+                height: 640,
+                syncScrolling: "single",
+                path: "{{ url_for('static',filename='editormd/lib/') }}",
+                // 上传图片
+                imageUpload: false,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                // 上传图片时指定调用后台的视图函数
+                // homepage是蓝图 uploads是访问url
+                imageUploadURL: "{{ url_for('admin.upload_file') }}",
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        var testEditor;
+
+        $(function () {
+            testEditor = editormd("zh-editormd", {
+                width: "100%",
+                height: 640,
+                syncScrolling: "single",
+                path: "{{ url_for('static',filename='editormd/lib/') }}",
+                // 上传图片
+                imageUpload: false,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                // 上传图片时指定调用后台的视图函数
+                // homepage是蓝图 uploads是访问url
+                imageUploadURL: "{{ url_for('admin.upload_file') }}",
+
+            });
+        });
+    </script>
+</div>
+
+</body>
+</html>

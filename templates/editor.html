@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8"/>
+    <title>MagusPub</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='editormd/css/editormd.css') }}"/>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+</head>
+<body>
+
+<form action="/publish" method="post">
+    <h3>中文论文页面编辑</h3>
+     <div id="test-editormd">
+        <textarea name="TextContent" id="TextContent" ></textarea>
+     </div>
+    <input type="submit" name="submit" value="发布博客">
+    <input type="reset" name="reset" value="重置">
+</form>
+
+<form action="/searchHtml" method="get">
+    <input type="submit" name="preview" value="预览">
+</form>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
+<script type="text/javascript">
+    var testEditor;
+
+    $(function () {
+        testEditor = editormd("test-editormd", {
+            width: "90%",
+            height: 640,
+            syncScrolling: "single",
+            path: "{{ url_for('static',filename='editormd/lib/') }}",
+            // 上传图片
+            imageUpload : true,
+            imageFormats : [ "jpg", "jpeg", "gif", "png", "bmp", "webp" ],
+            // 上传图片时指定调用后台的视图函数
+            // homepage是蓝图 uploads是访问url
+            imageUploadURL : "{{ url_for('hello_world') }}",
+
+        });
+    });
+</script>
+</body>
+</html>

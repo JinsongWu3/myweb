@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Patent</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-theme.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='editormd/css/editormd.css') }}"/>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ url_for('static',filename='txtfile.js') }}"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    MAGUS
+                    <small>后台管理</small>
+                </h1>
+            </div>
+            <ul class="breadcrumb">
+                <li><a href="{{ url_for('.pic') }}">轮播图编辑</a></li>
+                <li><a href="{{ url_for('.member') }}">成员编辑</a></li>
+                <li><a href="{{ url_for('.news') }}">快讯编辑</a></li>
+                <li><a href="{{ url_for('.paper') }}">论文编辑</a></li>
+                <li><a href="{{ url_for('.patent') }}">专利编辑</a></li>
+                <li><a href="{{ url_for('.competition') }}">竞赛编辑</a></li>
+                <li><a href="{{ url_for('.partner') }}">合作方</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <pre>
+        说明：
+            添加链接：##链接地址##  eg:##magus.ink##
+            先按下提交修改按钮，之后可进入预览页发布修改
+    </pre>
+
+    <form id="form" method="post">
+        <div class="col-md-12 column">
+            <h3 class="text-center">中文专利编辑</h3>
+        </div>
+        <div id="zh-editormd">
+            <textarea name="content_zh" id="content_zh">{{ content_zh }}</textarea>
+        </div>
+        <div class="col-md-12 column">
+            <h3 class="text-center">英文专利编辑</h3>
+        </div>
+        <div id="editormd_en">
+            <textarea name="content_en" id="content_en">{{ content_en }}</textarea>
+        </div>
+    </form>
+    <div class="col-md-12 column">
+        <div class="col-md-2 column">
+            <button type="button" onclick = "submit_txt('form','/admin/update_patent/')">提交修改</button>
+        </div>
+        <div class="col-md-2 column">
+            <button type="button" id="crop" disabled="disabled" onclick="location.href='{{ url_for('.patent_preview') }}'">预览</button>
+        </div>
+        <div class="col-md-8 column">
+
+        </div>
+
+    </div>
+    <pre>
+
+
+    </pre>
+    <script type="text/javascript">
+        var Editor_zh, Editor_en;
+        $(function () {
+                Editor_zh = editormd("zh-editormd", {
+                    width: "100%",
+                    height: 640,
+                    syncScrolling: "single",
+                    path: "{{ url_for('static',filename='editormd/lib/') }}",
+                    imageUpload: false,
+                    onload : function() {
+                            console.log('onload', this);
+                            //this.fullscreen();
+                            this.unwatch();
+                            //this.watch().fullscreen();
+
+                            //this.setMarkdown("#PHP");
+                            //this.width("100%");
+                            //this.height(480);
+                            //this.resize("100%", 640);
+                        }
+                });
+                Editor_en = editormd("editormd_en", {
+                    width: "100%",
+                    height: 640,
+                    syncScrolling: "single",
+                    path: "{{ url_for('static',filename='editormd/lib/') }}",
+                    imageUpload: false,
+                });
+
+                function watch() {
+                    Editor_zh.watch();
+                    Editor_en.watch();
+                };
+        });
+    </script>
+
+</div>
+
+</body>
+</html>

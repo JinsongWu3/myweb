@@ -1,0 +1,4 @@
+胡鑫雯、王浩楠、郑睿作为MAGUS-Enter团队主要成员，在第十六届中国研究生数学建模竞赛“视觉情报信息分析”赛题中获得一等奖（第3名）
+胡鑫雯、陈璐莎、林丽作为MAGUS-女子军团队主要成员，在“智子杯——人工智能大奖赛”中凭借“BCD-婴儿智能手环”AI创新方案获得第2名
+孙旭、訾源作为MAGUS.Gamma团队主要成员，在MM 2019视频关系理解（Relation Understanding in Videos, VRU）挑战赛的视频关系检测任务（Video Relation Detection track）中获得第1名
+陶淳、郭浩滨、谭昕作为MAGUS.EMBisPower团队主要成员，在MM 2019基于内容的视频关联预测（Content-based Video Relevance Prediction, CBVRP）挑战赛的电影任务（Movie track）获得第2名

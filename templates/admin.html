@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-theme.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+</head>
+<body>
+
+<div style="width:100%;text-align:center">
+    <div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<form role="form" method="POST">
+				<div class="form-group">
+					 <label for="exampleInputPassword1">Token</label><input type="password" class="form-control" name="token" />
+				</div>
+                <button type="submit" class="btn btn-default">Submit</button>
+                {% for foo in get_flashed_messages() %}
+                    {{ foo }}
+                {% endfor %}
+			</form>
+		</div>
+	</div>
+    </div>
+</div>
+
+
+</body>
+</html>

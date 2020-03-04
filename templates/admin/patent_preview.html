@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>专利预览</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-theme.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div class="container">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    MAGUS
+                    <small>后台管理</small>
+                </h1>
+            </div>
+            <div class="content">
+                <h2>已授权</h2>
+                <pre>{{ patent_zh_zl }}</pre>
+                <h2>已受理</h2>
+                <pre>{{ patent_zh_sq }}</pre>
+                <h2>已授权(en)</h2>
+                <pre>{{ patent_en_zl }}</pre>
+                <h2>已受理(en)</h2>
+                <pre>{{ patent_en_sq }}</pre>
+            </div>
+            <button onclick=pub_patent()>发布</button>
+        </div>
+    <pre>
+
+
+
+
+
+
+    </pre>
+
+
+</div>
+
+<script>
+function pub_patent(url){
+        $.ajax({
+        //几个参数需要注意一下
+        type: "GET",//方法类型
+        dataType: "json",//预期服务器返回的数据类型
+        url: '/admin/pub_patent',//url
+        data: {name: 'submit'},
+        success: function (result) {
+            console.log(result);//打印服务端返回的数据(调试用)
+            if (result.resultCode == 200) {
+                alert("SUCCESS");
+            }
+            ;
+        },
+        error: function () {
+            alert("异常！");
+        }
+    });
+
+}
+</script>
+
+</body>
+</html>

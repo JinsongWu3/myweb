@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/filepond/dist/filepond.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-theme.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='editormd/css/editormd.css') }}"/>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='txtfile.js') }}"></script>
+
+</head>
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    MAGUS <small>后台管理</small>
+                </h1>
+            </div>
+            <ul class="breadcrumb">
+                <li><a href="{{ url_for('.pic') }}">轮播图编辑</a></li>
+                <li><a href="{{ url_for('.member') }}">成员编辑</a></li>
+                <li><a href="{{ url_for('.news') }}">快讯编辑</a></li>
+                <li><a href="{{ url_for('.paper') }}">论文编辑</a></li>
+                <li><a href="{{ url_for('.patent') }}">专利编辑</a></li>
+                <li><a href="{{ url_for('.competition') }}">竞赛编辑</a></li>
+                <li><a href="{{ url_for('.partner') }}">合作方</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <form id="form_zh" method="post">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <h3 class="text-center">
+                        中文论文页面编辑
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div id="zh-editormd">
+            <textarea name="paper_zh" id="paper_zh">{{ paper_zh }}</textarea>
+        </div>
+        <label><input type="checkbox"/>确认修改</label>
+        <input form="content" type="submit" name="submit" value="提交修改" ,
+               onclick=submit_txt("form_zh","/admin/pub/paper_zh/")>
+        <input type="reset" name="reset" value="重置">
+    </form>
+</div>
+
+
+<div class="container">
+    <form method="post" id="form_en">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <h3 class="text-center">
+                        英文论文页面编辑
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div id="en-editormd">
+            <textarea name="paper_en" id="paper_en">{{ paper_en }}</textarea>
+        </div>
+        <label><input type="checkbox"/>确认修改</label>
+        <input form="content" type="submit" name="submit" value="提交修改"
+               onclick=submit_txt("form_en","/admin/pub/paper_en/")>
+        <input type="reset" name="reset" value="重置">
+    </form>
+    <script type="text/javascript">
+        var testEditor;
+        $(function () {
+            testEditor = editormd("en-editormd", {
+                width: "100%",
+                height: 640,
+                syncScrolling: "single",
+                path: "{{ url_for('static',filename='editormd/lib/') }}",
+                // 上传图片
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                // 上传图片时指定调用后台的视图函数
+                // homepage是蓝图 uploads是访问url
+                imageUploadURL: "{{ url_for('admin.upload_file') }}",
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        var testEditor;
+
+        $(function () {
+            testEditor = editormd("zh-editormd", {
+                width: "100%",
+                height: 640,
+                syncScrolling: "single",
+                path: "{{ url_for('static',filename='editormd/lib/') }}",
+                // 上传图片
+                imageUpload: true,
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                // 上传图片时指定调用后台的视图函数
+                // homepage是蓝图 uploads是访问url
+                imageUploadURL: "{{ url_for('admin.upload_file') }}",
+
+            });
+        });
+    </script>
+</div>
+
+<div class="container">
+    <div class="content">
+        <input type="file" name="file" id="file" style="visibility: hidden"/>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+
+<script>
+    $(function () {
+        // file
+        const fadeDuration = 500;
+        localStorage.setItem('uniqueFileIds', JSON.stringify([]));
+        let fileIds = [];
+        $.fn.filepond.registerPlugin(FilePondPluginFileValidateSize, FilePondPluginFileValidateType);
+        $('#file').filepond({
+            maxFiles: 5,
+            dropValidation: true,
+            allowDrag: true,
+            allowMultiple: true,
+            labelIdle: '把文件拖到这儿 或 浏览本地文件',
+            labelInvalidField: '包含了无效文件',
+            labelFileWaitingForSize: '正在获取文件大小',
+            labelFileSizeNotAvailable: '获取不到orz',
+            labelFileLoading: '正在加载文件',
+            labelFileLoadError: '加载错误！',
+            labelFileProcessing: '文件上传中',
+            labelFileProcessingComplete: '上传完成',
+            labelFileProcessingAborted: '取消上传啦',
+            labelFileProcessingError: '上传时遇到错误',
+            labelFileProcessingRevertError: '撤销时遇到错误',
+            labelFileRemoveError: '删除时遇到错误',
+            labelTapToCancel: '取消 👉',
+            labelTapToRetry: '重试 👉',
+            labelTapToUndo: '撤销 👉',
+            labelButtonRemoveItem: '',
+            labelButtonAbortItemLoad: '',
+            labelButtonRetryItemLoad: '',
+            labelButtonAbortItemProcessing: '',
+            labelButtonUndoItemProcessing: '',
+            labelButtonRetryItemProcessing: '',
+            labelButtonProcessItem: '',
+            maxFileSize: '24MB',
+            maxTotalFileSize: '50MB',
+            labelMaxFileSizeExceeded: '这个文件太大啦！',
+            labelMaxFileSize: '最多最多只能 {filesize} 哦',
+            labelMaxTotalFileSizeExceeded: '文件加起来太大了',
+            labelMaxTotalFileSize: '最多只能 {filesize} 啦',
+            server: {
+                url: '{{ host }}',
+                process: {
+                    url: "{{ url_for('handle_files') }}",
+                    method: 'POST',
+                    onload: (response) => {
+                        response = JSON.parse(response);
+                        if (response.code === 0) {
+                            let fileId = response.data;
+                            fileIds.push(fileId);
+                            return fileId;
+                        } else if (response.code === -1) {
+                            $('#file-type-warning').fadeIn(fadeDuration);
+                            setTimeout(() => {
+                                $('#file-type-warning').fadeOut(fadeDuration);
+                            }, 3000);
+                            console.log(response.msg);
+                        } else {
+                            console.log(response.msg);
+                        }
+                    },
+                    onerror: (response) => {
+                        console.log(response);
+                    }
+                },
+                revert: {
+                    url: '{{ url_for('handle_files') }}',
+                    onload: (response) => {
+                        response = JSON.parse(response);
+                        let fileId = response.data;
+                        let index = fileIds.indexOf(fileId);
+                        if (index > -1) {
+                            fileIds.splice(index, 1)
+                        }
+                        return fileId;
+                    }
+                },
+                fetch: null,
+                load: null,
+                restore: null
+            }
+        });
+    });
+</script>
+</body>
+</html>

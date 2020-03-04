@@ -1,0 +1,1 @@
+Sheng-hua Zhong, Yuantian Wang, **Tongwei Ren**, Mingjie Zheng, Yan Liu, and Gangshan Wu. Steganographer detection via multi-scale embedding probability estimation. ACM Transactions on Multimedia Computing, Communications, and Applications, in press.
