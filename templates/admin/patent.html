@@ -79,6 +79,7 @@
                     syncScrolling: "single",
                     path: "{{ url_for('static',filename='editormd/lib/') }}",
                     imageUpload: false,
+                    autoFocus : false
                 });
                 Editor_zh = editormd("zh-editormd", {
                     width: "100%",
@@ -86,6 +87,7 @@
                     syncScrolling: "single",
                     path: "{{ url_for('static',filename='editormd/lib/') }}",
                     imageUpload: false,
+                    autoFocus : false
                     toolbarIcons : function() {
                     // Or return editormd.toolbarModes[name]; // full, simple, mini
                     // Using "||" set icons align right.
