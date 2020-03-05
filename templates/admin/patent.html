@@ -73,6 +73,13 @@
     <script type="text/javascript">
         var Editor_zh, Editor_en;
         $(function () {
+                Editor_en = editormd("editormd_en", {
+                    width: "100%",
+                    height: 640,
+                    syncScrolling: "single",
+                    path: "{{ url_for('static',filename='editormd/lib/') }}",
+                    imageUpload: false,
+                });
                 Editor_zh = editormd("zh-editormd", {
                     width: "100%",
                     height: 640,
@@ -88,13 +95,6 @@
                             console.log('onload', this);
                             this.unwatch();
                         }
-                });
-                Editor_en = editormd("editormd_en", {
-                    width: "100%",
-                    height: 640,
-                    syncScrolling: "single",
-                    path: "{{ url_for('static',filename='editormd/lib/') }}",
-                    imageUpload: false,
                 });
 
                 function watch() {
