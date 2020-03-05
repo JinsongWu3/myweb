@@ -42,6 +42,7 @@
         说明：
             添加链接：##链接地址##  eg:##magus.ink##
             先按下提交修改按钮，之后可进入预览页发布修改
+            未提交修改时，无法预览发布
     </pre>
 
     <form id="form" method="post">
@@ -63,17 +64,12 @@
             <button type="button" onclick = "submit_txt('form','/admin/update_patent/')">提交修改</button>
         </div>
         <div class="col-md-2 column">
-            <button type="button" id="crop" disabled="disabled" onclick="location.href='{{ url_for('.patent_preview') }}'">预览</button>
+            <button type="button" id="preview" disabled="disabled" onclick="location.href='{{ url_for('.patent_preview') }}'">预览</button>
         </div>
-        <div class="col-md-8 column">
-
-        </div>
-
+        <div class="col-md-8 column"></div>
+        <div style=" height:100px " ></div>
     </div>
-    <pre>
 
-
-    </pre>
     <script type="text/javascript">
         var Editor_zh, Editor_en;
         $(function () {
@@ -83,16 +79,14 @@
                     syncScrolling: "single",
                     path: "{{ url_for('static',filename='editormd/lib/') }}",
                     imageUpload: false,
+                    toolbarIcons : function() {
+                    // Or return editormd.toolbarModes[name]; // full, simple, mini
+                    // Using "||" set icons align right.
+                    return ["undo", "redo", "|", "bold", "hr", "|", "preview", "watch", "|",  "info", "testIcon", "testIcon2", "file", "faicon", "||","testIcon"]
+                    },
                     onload : function() {
                             console.log('onload', this);
-                            //this.fullscreen();
                             this.unwatch();
-                            //this.watch().fullscreen();
-
-                            //this.setMarkdown("#PHP");
-                            //this.width("100%");
-                            //this.height(480);
-                            //this.resize("100%", 640);
                         }
                 });
                 Editor_en = editormd("editormd_en", {
