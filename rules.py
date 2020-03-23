@@ -11,14 +11,14 @@ paper_re_en = {r'##(.*)##':  r' <a href = "/static/paper/\g<1>">[paper]</a>',
                r'@@(.*)@@': r' <a href = "/static/paper/\g<1>">[poster]</a>',
                r'&&(.*)&&': r' <a href = "/static/paper/\g<1>">[dataset]</a>'}
 
-news_re_zh = {r'##(.*)##': r' [[详情]](http://\g<1>)'}
-news_re_en = {r'##(.*)##': r' [[details]](http://\g<1>)'}
+news_re_zh = {r'##(.*)##': r' <a href = "https://\g<1>">[详情]</a>'}
+news_re_en = {r'##(.*)##': r' <a href = "https://\g<1>">[details]</a>'}
 
 patent_re_zh = {r'##(.*)##': r' <a href = "https://\g<1>">[详情]</a>'}
 patent_re_en = {r'##(.*)##': r' <a href = "https://\g<1>">[details]</a>'}
 
-competiton_re_zh = {r'##(.*)##': r' [[详情]](http://\g<1>)'}
-competiton_re_en = {r'##(.*)##': r' [[details]](http://\g<1>)'}
+competiton_re_zh = {r'##(.*)##': r' <a href = "https://\g<1>">[详情]</a>'}
+competiton_re_en = {r'##(.*)##': r' <a href = "https://\g<1>">[details]</a>'}
 
 
 # 返回专利号和申请号
