@@ -22,7 +22,7 @@ txtfile_dic = {'paper_zh': 'static/source/paper_zh.txt',
 def admin():
     if request.method == 'POST':
         token = request.form.get('token')
-        print(token)
+        #print(token)
         if token == admin_token:
             f_paper_zh = open('static/source/paper_zh.txt', 'r', encoding='UTF-8')
             paper_zh = f_paper_zh.read()
