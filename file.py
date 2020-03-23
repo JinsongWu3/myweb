@@ -6,10 +6,18 @@ import sys
 
 def create_file(file):
     origin_filename = file.filename.encode('ascii', 'replace').decode('utf-8')
-    origin_filename = file.filename
-    file_id = str(uuid.uuid4())
+    #origin_filename = file.filename
     core_filename, file_type = os.path.splitext(origin_filename)
-    filename = sys.path[0]+'/file/'+core_filename+file_type
+    filename = sys.path[0]+'/static/paper/'+core_filename+file_type
     if not os.path.exists(filename):
         file.save(filename)
-    return file_id
+    return origin_filename
+
+def remove_file(file_name):
+
+    filename = sys.path[0]+'/static/paper/'+file_name
+    if not os.path.exists(filename):
+        return
+    else:
+        os.remove(filename)
+

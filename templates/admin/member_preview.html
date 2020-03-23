@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>成员预览</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-theme.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+    <link type="text/css" href="{{ url_for('static', filename='css/sudyNav.css') }}" rel="stylesheet">
+    <link type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+	<link type="text/css" href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
+
+
+</head>
+<body>
+
+<div class="container">
+    <!--展示图片-->
+    <div class="col-md-12 column">
+        <div class="page-header">
+            <h1>
+                MAGUS
+                <small>成员预览</small>
+            </h1>
+        </div>
+    </div>
+    <div class="col-md-12">
+            <div class="panel panel-default" style="height:800px; overflow-y:scroll">
+                <div class="panel-heading text-center">
+                    <h4>成员</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="wp-wrapper" id="container">
+                    <div class="wp-inner clearfix">
+                        <div class="post">
+                            <section id="members-section" class="contact-section section">
+                                <div class="students">
+                                    <div class="col-md-12 column">
+                                    <div class="text-title-no-border">
+                                    <h3>教师</h3>
+                                    </div>
+                                    </div>
+                                    <div class="images">
+                                        <img class="img" src="{{ url_for('static',filename='member/profile-image.png') }}" alt="">
+                                        <span class="introduce"><b><a
+                                                    href="https://software.nju.edu.cn/rentw/">任桐炜</a></b><br /><span
+                                                class="intro-text">副教授</span><br /></span>
+
+                                    </div>
+                                    <!--//intro-->
+                                </div>
+                                <div class="students">
+                                {% for p in members %}
+                                    {% if p | length == 3 %}
+
+                                        <div class="images">
+                                            <img class="img" src="{{ url_for('static',filename='member/'+p[0]) }}" alt="">
+                                            <span class="introduce"><b>{{ p[1] }}</b><br /><span
+                                                    class="intro-text">{{ p[2] }}</span><br /></span>
+                                        </div>
+
+                                    {% else %}
+                                    <div class="col-md-12 column">
+                                        <div class="text-title-no-border">
+                                                    <h3>{{ p[0] }}</h3><br>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                                </div>
+
+                            </section>
+                        </div>
+                    </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        <div  class="col-md-12 column" style=" height:10px" ></div>
+        <div class="col-md-4 column"></div>
+        <div class="col-md-2 column">
+            <button class="btn btn-primary" onclick=pub_member()> 发布 </button>
+        </div>
+        <div class="col-md-2 column">
+            <button class="btn btn-primary" type="button" onclick="location.href='{{ url_for('.member') }}'">返回编辑</button>
+        </div>
+
+    <div class="col-md-12 column" style=" height:60px "></div>
+    </div>
+
+</div>
+
+<script>
+function pub_member(url){
+        $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: '/admin/pub_member',//url
+        data: {name: 'submit'},
+        success: function (result) {
+            console.log(result);
+            if (result.resultCode == 200) {
+                alert("SUCCESS");
+            }
+        },
+        error: function () {
+            alert("ERROR");
+        }
+    });
+
+}
+
+</script>
+
+
+</body>
+</html>

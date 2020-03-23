@@ -9,14 +9,14 @@
     <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
 </head>
 <body>
-
+<div style=" height:100px " ></div>
 <div style="width:100%;text-align:center">
     <div class="container">
 	<div class="row clearfix">
-		<div class="col-md-12 column">
+		<div class="col-md-2 col-md-offset-5">
 			<form role="form" method="POST">
 				<div class="form-group">
-					 <label for="exampleInputPassword1">Token</label><input type="password" class="form-control" name="token" />
+					 <label>Token</label><input type="password" class="form-control" name="token" />
 				</div>
                 <button type="submit" class="btn btn-default">Submit</button>
                 {% for foo in get_flashed_messages() %}

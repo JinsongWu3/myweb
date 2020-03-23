@@ -6,12 +6,12 @@
     <title>Patent</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-theme.css') }}">
-    <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static',filename='editormd/css/editormd.css') }}"/>
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-    <script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
 
+    <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static',filename='txtfile.js') }}"></script>
 </head>
 <body>
@@ -21,7 +21,7 @@
             <div class="page-header">
                 <h1>
                     MAGUS
-                    <small>后台管理</small>
+                    <small>专利编辑</small>
                 </h1>
             </div>
             <ul class="breadcrumb">
@@ -41,33 +41,34 @@
     <pre>
         说明：
             添加链接：##链接地址##  eg:##magus.ink##
-            先按下提交修改按钮，之后可进入预览页发布修改
-            未提交修改时，无法预览发布
+            修改后点击预览，可以进入预览界面进行发布。
     </pre>
 
     <form id="form" method="post">
-        <div class="col-md-12 column">
+        <div class="col-md-6 column">
             <h3 class="text-center">中文专利编辑</h3>
+            <div id="zh-editormd">
+                <textarea name="content_zh" id="content_zh">{{ content_zh }}</textarea>
+            </div>
         </div>
-        <div id="zh-editormd">
-            <textarea name="content_zh" id="content_zh">{{ content_zh }}</textarea>
-        </div>
-        <div class="col-md-12 column">
+        <div class="col-md-6 column">
             <h3 class="text-center">英文专利编辑</h3>
-        </div>
-        <div id="editormd_en">
-            <textarea name="content_en" id="content_en">{{ content_en }}</textarea>
+            <div id="editormd_en">
+                <textarea name="content_en" id="content_en">{{ content_en }}</textarea>
+            </div>
         </div>
     </form>
     <div class="col-md-12 column">
         <div class="col-md-2 column">
-            <button type="button" onclick = "submit_txt('form','/admin/update_patent/')">提交修改</button>
+            <button class="btn btn-primary" type="button" onclick="submit_txt('form','/admin/update_patent/')">预览</button>
         </div>
         <div class="col-md-2 column">
-            <button type="button" id="preview" disabled="disabled" onclick="location.href='{{ url_for('.patent_preview') }}'">预览</button>
+            <button hidden type="button" id="preview" disabled="disabled"
+                    onclick="location.href='{{ url_for('.patent_preview') }}'">预览
+            </button>
         </div>
         <div class="col-md-8 column"></div>
-        <div style=" height:100px " ></div>
+        <div style=" height:100px "></div>
     </div>
 
     <script type="text/javascript">
@@ -79,7 +80,7 @@
                     syncScrolling: "single",
                     path: "{{ url_for('static',filename='editormd/lib/') }}",
                     imageUpload: false,
-                    autoFocus : false
+                    autoFocus : false,
                 });
                 Editor_zh = editormd("zh-editormd", {
                     width: "100%",
@@ -87,7 +88,7 @@
                     syncScrolling: "single",
                     path: "{{ url_for('static',filename='editormd/lib/') }}",
                     imageUpload: false,
-                    autoFocus : false
+                    autoFocus : false,
                     toolbarIcons : function() {
                     // Or return editormd.toolbarModes[name]; // full, simple, mini
                     // Using "||" set icons align right.
@@ -104,6 +105,7 @@
                     Editor_en.watch();
                 };
         });
+
     </script>
 
 </div>

@@ -11,14 +11,12 @@ function submit_txt(form, url_name) {
         success: function (result) {
             console.log(result);//打印服务端返回的数据(调试用)
             if (result.resultCode == 200) {
-		$("#preview").removeAttr("disabled");
-		alert("SUCC_ESS");
-
+                $("#preview").removeAttr("disabled");
+                $("#preview").trigger("click");
             }
-            ;
         },
         error: function () {
-            alert("异常！");
+            alert("ERROR！");
         }
     });
 

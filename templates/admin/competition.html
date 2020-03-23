@@ -2,8 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Competition</title>
+    <title>竞赛编辑</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-theme.css') }}">
     <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
@@ -11,7 +10,6 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='editormd/css/editormd.css') }}"/>
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
     <script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
-
     <script type="text/javascript" src="{{ url_for('static',filename='txtfile.js') }}"></script>
 </head>
 <body>
@@ -20,7 +18,7 @@
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    MAGUS <small>后台管理</small>
+                    MAGUS <small>竞赛编辑</small>
                 </h1>
             </div>
             <ul class="breadcrumb">
@@ -37,75 +35,69 @@
 </div>
 
 <div class="container">
-    <form id="form_zh" method="post">
-        <div class="container">
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-                    <h3 class="text-center">
-                        中文竞赛编辑
-                    </h3>
-                </div>
+    <pre>
+        说明：
+            添加链接：##链接地址##  eg:##magus.ink##
+            修改后点击预览，可以进入预览界面进行发布。
+    </pre>
+    <form id="form" method="post">
+        <div class="col-md-6 column">
+            <h3 class="text-center">中文竞赛编辑</h3>
+            <div id="zh-editormd">
+                <textarea name="content_zh" id="content_zh">{{ content_zh }}</textarea>
             </div>
         </div>
-        <div id="zh-editormd">
-            <textarea name="competition_zh" id="competition_zh">{{ content_zh }}</textarea>
-        </div>
-        <label><input type="checkbox"/>确认修改</label>
-        <input form="#" type="submit" name="submit" value="提交修改" onclick=submit_txt("form_zh","/admin/pub/competition_zh/")>
-        <input type="reset" name="reset" value="重置">
-    </form>
-    <form id="form_en" method="post">
-        <div class="container">
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-                    <h3 class="text-center">
-                        英文竞赛编辑
-                    </h3>
-                </div>
-            </div>
-        </div>
-        <div id="en-editormd">
-            <textarea name="competition_en" id="competition_en">{{ content_en }}</textarea>
-        </div>
-        <label><input type="checkbox"/>确认修改</label>
-        <input form="#" type="submit" name="submit" value="提交修改" onclick=submit_txt("form_en","/admin/pub/competition_en/")>
-        <input type="reset" name="reset" value="重置">
-    </form>
-    <script type="text/javascript">
-        var testEditor;
-        $(function () {
-            testEditor = editormd("en-editormd", {
-                width: "100%",
-                height: 640,
-                syncScrolling: "single",
-                path: "{{ url_for('static',filename='editormd/lib/') }}",
-                // 上传图片
-                imageUpload: false,
-                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                // 上传图片时指定调用后台的视图函数
-                // homepage是蓝图 uploads是访问url
-                imageUploadURL: "{{ url_for('admin.upload_file') }}",
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        var testEditor;
-        $(function () {
-            testEditor = editormd("zh-editormd", {
-                width: "100%",
-                height: 640,
-                syncScrolling: "single",
-                path: "{{ url_for('static',filename='editormd/lib/') }}",
-                // 上传图片
-                imageUpload: false,
-                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                // 上传图片时指定调用后台的视图函数
-                // homepage是蓝图 uploads是访问url
-                imageUploadURL: "{{ url_for('admin.upload_file') }}",
 
-            });
+        <div class="col-md-6 column">
+            <h3 class="text-center">英文竞赛编辑</h3>
+            <div id="editormd_en">
+                <textarea name="content_en" id="content_en">{{ content_en }}</textarea>
+            </div>
+        </div>
+    </form>
+    <div class="col-md-12 column">
+        <div class="col-md-2 column">
+            <button class="btn btn-primary" type="button" onclick="submit_txt('form','/admin/update_competition/')">预览</button>
+        </div>
+        <div class="col-md-2 column">
+            <button hidden type="button" id="preview" disabled="disabled"
+                    onclick="location.href='{{ url_for('.competition_preview') }}'">预览
+            </button>
+        </div>
+        <div class="col-md-8 column"></div>
+        <div style=" height:100px "></div>
+    </div>
+    <script type="text/javascript">
+        var Editor_zh, Editor_en;
+        $(function () {
+                Editor_en = editormd("editormd_en", {
+                    width: "100%",
+                    height: 640,
+                    syncScrolling: "single",
+                    path: "{{ url_for('static',filename='editormd/lib/') }}",
+                    imageUpload: false,
+                    autoFocus : false,
+                });
+                Editor_zh = editormd("zh-editormd", {
+                    width: "100%",
+                    height: 640,
+                    syncScrolling: "single",
+                    path: "{{ url_for('static',filename='editormd/lib/') }}",
+                    imageUpload: false,
+                    autoFocus : false,
+                    toolbarIcons : function() {
+                    // Or return editormd.toolbarModes[name]; // full, simple, mini
+                    // Using "||" set icons align right.
+                    return ["undo", "redo", "|", "bold", "hr", "|", "preview", "watch", "|",  "info", "testIcon", "testIcon2", "file", "faicon", "||","testIcon"]
+                    },
+                    onload : function() {
+                            console.log('onload', this);
+                            this.unwatch();
+                        }
+                });
         });
     </script>
+
 </div>
 
 </body>

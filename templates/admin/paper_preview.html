@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>论文预览</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-theme.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+</head>
+<body>
+<div class="container">
+    <div class="col-md-12 column">
+        <div class="page-header">
+            <h1>
+                MAGUS
+                <small>论文编辑</small>
+            </h1>
+        </div>
+        <div class="content">
+
+            <div class="col-md-6 column">
+                <div style="height: 800px; overflow-y:scroll">
+                    <div class="text-title-no-border">
+                        <h3>论文(中)</h3>
+                    </div>
+                    <table>
+                        <colgroup>
+                            <col width="25%" />
+                            <col width="75%" />
+                        </colgroup>
+                        {% for element in content_zh_thisyear %}
+                            <tr>
+                            {% if element | length ==1 %}
+                                <div class="text-title-no-border">
+                                    <h3>{{ element[0]|safe }}</h3>
+                                </div>
+                            {% else %}
+                                <td><img src="{{ url_for('static', filename='paper/'+element[0]) }}" style="height:100px"></td>
+                                <td>{{ element[1]|safe }}</td>
+                            {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </table>
+                        {% for element in content_zh_before %}
+                            {% if element | length <16 %}
+                                <div class="text-title-no-border">
+                                    <h3>{{ element|safe }}</h3>
+                                </div>
+                            {% else %}
+                                <li>{{ element|safe }}</li>
+                            {% endif %}
+                        {% endfor %}
+
+                </div>
+            </div>
+
+            <div class="col-md-6 column">
+                <div style="height: 800px; overflow-y:scroll">
+                    <div class="text-title-no-border">
+                        <h3>论文(英)</h3>
+                    </div>
+                    <table>
+                        <colgroup>
+                            <col width="25%" />
+                            <col width="75%" />
+                        </colgroup>
+                        {% for element in content_en_thisyear %}
+                            <tr>
+                            {% if element | length == 1 %}
+                                <div class="text-title-no-border">
+                                    <h3>{{ element[0]|safe }}</h3>
+                                </div>
+                            {% else %}
+                                <td><img src="{{ url_for('static', filename='paper/'+element[0]) }}" style="height:100px"></td>
+                                <td>{{ element[1]|safe }}</td>
+                            {% endif %}
+                            </tr>
+                        {% endfor %}
+
+                    </table>
+
+                        {% for element in content_en_before %}
+                            {% if element | length <16 %}
+                                <div class="text-title-no-border">
+                                    <h3>{{ element|safe }}</h3>
+                                </div>
+                            {% else %}
+                                <li>{{ element|safe }}</li>
+                            {% endif %}
+                        {% endfor %}
+                </div>
+            </div>
+
+        </div>
+        <div  class="col-md-12 column" style=" height:30px" ></div>
+        <div class="col-md-4 column"></div>
+        <div class="col-md-2 column">
+            <button class="btn btn-primary" onclick=pub_paper()> 发布 </button>
+        </div>
+        <div class="col-md-2 column">
+            <button class="btn btn-primary" type="button" onclick="location.href='{{ url_for('.paper') }}'">返回编辑</button>
+        </div>
+
+        <div class="col-md-12 column" style=" height:60px "></div>
+    </div>
+
+    <div style=" height:100px "></div>
+</div>
+
+<script>
+function pub_paper(url){
+        $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: '/admin/pub_paper',//url
+        data: {name: 'submit'},
+        success: function (result) {
+            console.log(result);
+            if (result.resultCode == 200) {
+                alert("SUCCESS");
+            }
+        },
+        error: function () {
+            alert("ERROR");
+        }
+    });
+
+}
+
+</script>
+</body>
+</html>

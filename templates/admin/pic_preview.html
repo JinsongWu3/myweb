@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图预览</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-theme.css') }}">
+    <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+</head>
+<body>
+
+<div class="container">
+    <!--展示图片-->
+    <div class="col-md-12 column">
+        <div class="page-header">
+            <h1>
+                MAGUS
+                <small>轮播图预览</small>
+            </h1>
+        </div>
+    </div>
+    <div class="col-md-12">
+            <div class="panel panel-default" style="height:600px; overflow-y:scroll">
+                <div class="panel-heading text-center">
+                    <h4>轮播图</h4>
+                </div>
+                <div class="panel-body">
+                {% for p in pics %}
+                    <div class="col-sm-6 col-md-3" style="height:200px">
+                        <div class="thumbnail">
+                            <img src= "{{ url_for('static',filename='pic/'+p[0]) }}" alt="..." style="height:100px">
+                            <h4>{{ p[1] }}</h4>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        <div  class="col-md-12 column" style=" height:10px" ></div>
+        <div class="col-md-4 column"></div>
+        <div class="col-md-2 column">
+            <button class="btn btn-primary" onclick=pub_pic()> 发布 </button>
+        </div>
+        <div class="col-md-2 column">
+            <button class="btn btn-primary" type="button" onclick="location.href='{{ url_for('.pic') }}'">返回编辑</button>
+        </div>
+
+    <div class="col-md-12 column" style=" height:60px "></div>
+    </div>
+
+</div>
+
+<script>
+function pub_pic(url){
+        $.ajax({
+        type: "GET",
+        dataType: "json",
+        url: '/admin/pub_pic',//url
+        data: {name: 'submit'},
+        success: function (result) {
+            console.log(result);
+            if (result.resultCode == 200) {
+                alert("SUCCESS");
+            }
+        },
+        error: function () {
+            alert("ERROR");
+        }
+    });
+
+}
+
+</script>
+
+
+</body>
+</html>

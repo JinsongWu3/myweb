@@ -19,7 +19,7 @@
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    MAGUS <small>后台管理</small>
+                    MAGUS <small>快讯编辑</small>
                 </h1>
             </div>
             <ul class="breadcrumb">
@@ -36,76 +36,70 @@
 </div>
 
 <div class="container">
-    <form id="form_zh" method="post">
-        <div class="container">
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-                    <h3 class="text-center">
-                        中文新闻编辑
-                    </h3>
-                </div>
+    <pre>
+        说明：
+            添加链接：##链接地址##  eg:##magus.ink##
+            先按下提交修改按钮，之后可进入预览页发布修改
+            未提交修改时，无法预览发布
+    </pre>
+    <form id="form" method="post">
+        <div class="col-md-6 column">
+            <h3 class="text-center">中文快讯编辑</h3>
+            <div id="zh-editormd">
+                <textarea name="content_zh" id="content_zh">{{ content_zh }}</textarea>
             </div>
         </div>
-        <div id="zh-editormd">
-            <textarea name="news_zh" id="news_zh">{{ content_zh }}</textarea>
-        </div>
-        <label><input type="checkbox"/>确认修改</label>
-        <input form="#" type="submit" name="submit" value="提交修改" onclick=submit_txt("form_zh","/admin/pub/news_zh/")>
-        <input type="reset" name="reset" value="重置">
-    </form>
-    <form id="form_en" method="post">
-        <div class="container">
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-                    <h3 class="text-center">
-                        英文新闻编辑
-                    </h3>
-                </div>
+
+        <div class="col-md-6 column">
+            <h3 class="text-center">英文快讯编辑</h3>
+            <div id="editormd_en">
+                <textarea name="content_en" id="content_en">{{ content_en }}</textarea>
             </div>
         </div>
-        <div id="en-editormd">
-            <textarea name="news_en" id="news_en">{{ content_en }}</textarea>
-        </div>
-        <label><input type="checkbox"/>确认修改</label>
-        <input form="#" type="submit" name="submit" value="提交修改" onclick=submit_txt("form_en","/admin/pub/news_en/")>
-        <input type="reset" name="reset" value="重置">
     </form>
+    <div class="col-md-12 column">
+        <div class="col-md-2 column">
+            <button class="btn btn-primary" type="button" onclick="submit_txt('form','/admin/update_news/')">预览</button>
+        </div>
+        <div class="col-md-2 column">
+            <button hidden type="button" id="preview" disabled="disabled"
+                    onclick="location.href='{{ url_for('.news_preview') }}'">预览
+            </button>
+        </div>
+        <div class="col-md-8 column"></div>
+        <div style=" height:100px "></div>
+    </div>
     <script type="text/javascript">
-        var testEditor;
+        var Editor_zh, Editor_en;
         $(function () {
-            testEditor = editormd("en-editormd", {
-                width: "100%",
-                height: 640,
-                syncScrolling: "single",
-                path: "{{ url_for('static',filename='editormd/lib/') }}",
-                // 上传图片
-                imageUpload: false,
-                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                // 上传图片时指定调用后台的视图函数
-                // homepage是蓝图 uploads是访问url
-                imageUploadURL: "{{ url_for('admin.upload_file') }}",
-            });
+                Editor_en = editormd("editormd_en", {
+                    width: "100%",
+                    height: 640,
+                    syncScrolling: "single",
+                    path: "{{ url_for('static',filename='editormd/lib/') }}",
+                    imageUpload: false,
+                    autoFocus : false,
+                });
+                Editor_zh = editormd("zh-editormd", {
+                    width: "100%",
+                    height: 640,
+                    syncScrolling: "single",
+                    path: "{{ url_for('static',filename='editormd/lib/') }}",
+                    imageUpload: false,
+                    autoFocus : false,
+                    toolbarIcons : function() {
+                    // Or return editormd.toolbarModes[name]; // full, simple, mini
+                    // Using "||" set icons align right.
+                    return ["undo", "redo", "|", "bold", "hr", "|", "preview", "watch", "|",  "info", "testIcon", "testIcon2", "file", "faicon", "||","testIcon"]
+                    },
+                    onload : function() {
+                            console.log('onload', this);
+                            this.unwatch();
+                        }
+                });
         });
     </script>
-    <script type="text/javascript">
-        var testEditor;
 
-        $(function () {
-            testEditor = editormd("zh-editormd", {
-                width: "100%",
-                height: 640,
-                syncScrolling: "single",
-                path: "{{ url_for('static',filename='editormd/lib/') }}",
-                // 上传图片
-                imageUpload: false,
-                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                // 上传图片时指定调用后台的视图函数
-                // homepage是蓝图 uploads是访问url
-                imageUploadURL: "{{ url_for('admin.upload_file') }}",
-
-            });
-        });
-    </script>
 </div>
 
 </body>

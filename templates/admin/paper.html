@@ -21,7 +21,7 @@
         <div class="col-md-12 column">
             <div class="page-header">
                 <h1>
-                    MAGUS <small>后台管理</small>
+                    MAGUS <small>论文编辑</small>
                 </h1>
             </div>
             <ul class="breadcrumb">
@@ -38,80 +38,87 @@
 </div>
 
 <div class="container">
-    <form id="form_zh" method="post">
-        <div class="container">
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-                    <h3 class="text-center">
-                        中文论文页面编辑
-                    </h3>
-                </div>
+    <pre>
+        说明：
+            添加链接：##论文文件名##  eg:##xxx.pdf##
+            添加视频链接：$$视频文件名$$ eg:$$xxx.mp4$$
+            添加视频链接：@@海报文件名@@ eg:@@xxx.png@@
+            添加数据集链接：&&数据集文件名&& eg:&&xxx.zip&&
+            字符数小于15的行将会被判断为小标题，第一个小标题下的论文需附加图片
+            附加图片的格式为 图片名|论文
+            修改后点击预览，可以进入预览界面进行发布。
+    </pre>
+    <form id="form" method="post">
+        <div class="col-md-6 column">
+            <div class="row" id="row_left"><style>
+                #row_left {
+                    margin-right: 0;
+                    margin-left: 5;
+                }
+            </style>
+            <h3 class="text-center">中文论文编辑</h3>
+            <div id="zh-editormd">
+                <textarea name="content_zh" id="content_zh">{{ content_zh }}</textarea>
+            </div>
             </div>
         </div>
-        <div id="zh-editormd">
-            <textarea name="paper_zh" id="paper_zh">{{ paper_zh }}</textarea>
-        </div>
-        <label><input type="checkbox"/>确认修改</label>
-        <input form="content" type="submit" name="submit" value="提交修改" ,
-               onclick=submit_txt("form_zh","/admin/pub/paper_zh/")>
-        <input type="reset" name="reset" value="重置">
-    </form>
-</div>
 
-
-<div class="container">
-    <form method="post" id="form_en">
-        <div class="container">
-            <div class="row clearfix">
-                <div class="col-md-12 column">
-                    <h3 class="text-center">
-                        英文论文页面编辑
-                    </h3>
-                </div>
+        <div class="col-md-6 column">
+            <div class="row"  id="row_right"> <style>
+                #row_right {
+                    margin-right: 5;
+                    margin-left: 0;
+                }
+            </style>
+            <h3 class="text-center">英文论文编辑</h3>
+            <div id="editormd_en">
+                <textarea name="content_en" id="content_en">{{ content_en }}</textarea>
+            </div>
             </div>
         </div>
-        <div id="en-editormd">
-            <textarea name="paper_en" id="paper_en">{{ paper_en }}</textarea>
-        </div>
-        <label><input type="checkbox"/>确认修改</label>
-        <input form="content" type="submit" name="submit" value="提交修改"
-               onclick=submit_txt("form_en","/admin/pub/paper_en/")>
-        <input type="reset" name="reset" value="重置">
     </form>
+        <div class="col-md-12 column">
+        <div class="col-md-2 column">
+            <div class="row no-gutter">
+            <button class="btn btn-primary" type="button" onclick="submit_txt('form','/admin/update_paper/')">预览</button>
+            </div>
+        </div>
+        <div class="col-md-2 column">
+            <button hidden type="button" id="preview" disabled="disabled"
+                    onclick="location.href='{{ url_for('.paper_preview') }}'">预览
+            </button>
+        </div>
+        <div class="col-md-8 column"></div>
+        <div style=" height:40px "></div>
+    </div>
     <script type="text/javascript">
-        var testEditor;
+        var Editor_zh, Editor_en;
         $(function () {
-            testEditor = editormd("en-editormd", {
-                width: "100%",
-                height: 640,
-                syncScrolling: "single",
-                path: "{{ url_for('static',filename='editormd/lib/') }}",
-                // 上传图片
-                imageUpload: true,
-                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                // 上传图片时指定调用后台的视图函数
-                // homepage是蓝图 uploads是访问url
-                imageUploadURL: "{{ url_for('admin.upload_file') }}",
-            });
-        });
-    </script>
-    <script type="text/javascript">
-        var testEditor;
-
-        $(function () {
-            testEditor = editormd("zh-editormd", {
-                width: "100%",
-                height: 640,
-                syncScrolling: "single",
-                path: "{{ url_for('static',filename='editormd/lib/') }}",
-                // 上传图片
-                imageUpload: true,
-                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                // 上传图片时指定调用后台的视图函数
-                // homepage是蓝图 uploads是访问url
-                imageUploadURL: "{{ url_for('admin.upload_file') }}",
-
-            });
+                Editor_en = editormd("editormd_en", {
+                    width: "100%",
+                    height: 640,
+                    syncScrolling: "single",
+                    path: "{{ url_for('static',filename='editormd/lib/') }}",
+                    imageUpload: false,
+                    autoFocus : false,
+                });
+                Editor_zh = editormd("zh-editormd", {
+                    width: "100%",
+                    height: 640,
+                    syncScrolling: "single",
+                    path: "{{ url_for('static',filename='editormd/lib/') }}",
+                    imageUpload: false,
+                    autoFocus : false,
+                    toolbarIcons : function() {
+                    // Or return editormd.toolbarModes[name]; // full, simple, mini
+                    // Using "||" set icons align right.
+                    return ["undo", "redo", "|", "bold", "hr", "|", "preview", "watch", "|",  "info", "testIcon", "testIcon2", "file", "faicon", "||","testIcon"]
+                    },
+                    onload : function() {
+                            console.log('onload', this);
+                            this.unwatch();
+                        }
+                });
         });
     </script>
 </div>
@@ -120,12 +127,15 @@
     <div class="content">
         <input type="file" name="file" id="file" style="visibility: hidden"/>
     </div>
+    <div style=" height:100px "></div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 <script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 <script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
 <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
 <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+
+
 
 <script>
     $(function () {
@@ -161,8 +171,8 @@
             labelButtonUndoItemProcessing: '',
             labelButtonRetryItemProcessing: '',
             labelButtonProcessItem: '',
-            maxFileSize: '24MB',
-            maxTotalFileSize: '50MB',
+            maxFileSize: '50MB',
+            maxTotalFileSize: '100MB',
             labelMaxFileSizeExceeded: '这个文件太大啦！',
             labelMaxFileSize: '最多最多只能 {filesize} 哦',
             labelMaxTotalFileSizeExceeded: '文件加起来太大了',

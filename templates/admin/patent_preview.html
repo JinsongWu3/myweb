@@ -8,30 +8,72 @@
     <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
     <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!--    <script src="https://unpkg.com/vue/dist/vue.js"></script>-->
+    <!--    <link rel="stylesheet" href="{{ url_for('static', filename='strapdown/strapdown.css') }}">-->
+    <!--    <link rel="stylesheet" href="{{ url_for('static', filename='strapdown/bootstrap-responsive.min.css') }}">-->
+    <!--    <link rel="stylesheet" href="{{ url_for('static', filename='strapdown/united.min.css') }}">-->
 </head>
 <body>
 <div class="container">
-        <div class="col-md-12 column">
-            <div class="page-header">
-                <h1>
-                    MAGUS
-                    <small>专利预览</small>
-                </h1>
-            </div>
-            <div class="content">
-                <h3>已授权(中)</h3>
-                <pre>{{ patent_zh_zl }}</pre>
-                <h3>已受理(中)</h3>
-                <pre>{{ patent_zh_sq }}</pre>
-                <h3>已授权(英)</h3>
-                <pre>{{ patent_en_zl }}</pre>
-                <h3>已受理(英)</h3>
-                <pre>{{ patent_en_sq }}</pre>
-            </div>
-            <button onclick=pub_patent()>发布</button>
+    <div class="col-md-12 column">
+        <div class="page-header">
+            <h1>
+                MAGUS
+                <small>专利预览</small>
+            </h1>
         </div>
-    <div style=" height:100px " ></div>
+        <div class="content">
+            <div class="col-md-6 column">
+                <div style="height: 600px; overflow-y:scroll">
+                    <div class="text-title-no-border">
+                        <h3>已授权(中)</h3>
+                    </div>
+                    <ul>
+                        {% for element in content_zh_zl %}
+                        <li>{{ element|safe }}</li>
+                        {%  endfor %}
+                    </ul>
+                    <div class="text-title-no-border">
+                        <h3>已受理(中)</h3>
+                    </div>
+                    <ul>
+                        {% for element in content_zh_sq %}
+                        <li>{{ element|safe }}</li>
+                        {%  endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 column">
+                <div style="height: 600px; overflow-y:scroll">
+                <div class="text-title-no-border">
+                    <h3>已授权(英)</h3>
+                </div>
+                <ul>
+                    {% for element in content_en_zl %}
+                    <li>{{ element|safe }}</li>
+                    {%  endfor %}
+                </ul>
+                <div class="text-title-no-border">
+                    <h3>已受理(英)</h3>
+                </div>
+                <ul>
+                    {% for element in content_en_sq %}
+                    <li>{{ element|safe }}</li>
+                    {%  endfor %}
+                </ul>
+                </div>
+            </div>
+        </div>
+        <div  class="col-md-12 column" style=" height:30px" ></div>
+        <div class="col-md-4 column"></div>
+        <div class="col-md-2 column">
+            <button class="btn btn-primary" onclick=pub_patent()> 发布 </button>
+        </div>
+        <div class="col-md-2 column">
+            <button class="btn btn-primary" type="button" onclick="location.href='{{ url_for('.patent') }}'">返回编辑</button>
+        </div>
+
+    <div class="col-md-12 column" style=" height:60px "></div>
 </div>
 
 <script>
@@ -50,12 +92,16 @@ function pub_patent(url){
             ;
         },
         error: function () {
-            alert("异常！");
+            alert("ERROR！");
         }
     });
 
 }
+
 </script>
+<!--<script src="{{ url_for('static', filename='strapdown/strapdown.js') }}"></script>-->
 
 </body>
+
+<!--<script src="http://strapdownjs.com/v/0.2/strapdown.js"></script>-->
 </html>

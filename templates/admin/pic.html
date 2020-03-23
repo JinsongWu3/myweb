@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>轮播图编辑</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap-theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='editormd/css/editormd.css') }}"/>
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+    <script src="{{ url_for('static', filename='bootstrap/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='txtfile.js') }}"></script>
+</head>
+<body>
+<!--<#&#45;&#45;导航栏&ndash;&gt;-->
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="page-header">
+                <h1>
+                    MAGUS
+                    <small>轮播图编辑</small>
+                </h1>
+            </div>
+            <ul class="breadcrumb">
+                <li><a href="{{ url_for('.pic') }}">轮播图编辑</a></li>
+                <li><a href="{{ url_for('.member') }}">成员编辑</a></li>
+                <li><a href="{{ url_for('.news') }}">快讯编辑</a></li>
+                <li><a href="{{ url_for('.paper') }}">论文编辑</a></li>
+                <li><a href="{{ url_for('.patent') }}">专利编辑</a></li>
+                <li><a href="{{ url_for('.competition') }}">竞赛编辑</a></li>
+                <li><a href="{{ url_for('.partner') }}">合作方</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="col-md-12 column">
+        <div class="row clearfix">
+        <div class="col-md-4 column">
+            <div class="row" id="row_left"><style>
+                #row_left {
+                    margin-right: 0;
+                    margin-left: 5;
+                }
+            </style>
+            <div class="panel panel-default" style="height:300px">
+                <div class="panel-heading">
+                    说明
+                </div>
+                    <p>
+                        文本框用于编辑轮播图显示顺序<br>
+                        请在添加好图片文件和修改好显示顺序之后进入预览页发布修改
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 column">
+            <div class="row" id="row_right"><style>
+                #row_right {
+                    margin-right: 5;
+                    margin-left: 0;
+                }
+            </style>
+            <form id="form" method="post">
+                    <div id="editormd">
+                        <textarea name="content" id="content">{{ content }}</textarea>
+                    </div>
+            </form>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-2 column">
+            <button class="btn btn-primary" type="button" onclick="submit_txt('form','/admin/update_pic/')">预览</button>
+        </div>
+        <div class="col-md-2 column">
+            <button hidden type="button" id="preview" disabled="disabled"
+                    onclick="location.href='{{ url_for('.pic_preview') }}'">预览
+            </button>
+        </div>
+        <div class="col-md-8 column"></div>
+        <div class="col-md-12 column" style=" height:10px "></div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    上传图片
+                </div>
+                <div class="panel-body">
+                    <div class="form-group col-md-6">
+                        <input id="upload_input" type="file" name="file" class="form-control">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button type="submit" class="btn btn-default" onclick="add_pic()">添加</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--展示图片-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h4>轮播图</h4>
+                </div>
+                <div class="panel-body" id="pb">
+                {% for p in pics %}
+                    <div id="{{p[:-4]}}" class="col-sm-6 col-md-4" style="height:220px">
+                        <div class="thumbnail">
+                            <img src= "{{ url_for('static',filename='pic/'+p) }}" alt="..." style="height:100px">
+                            <div class="caption">
+                                <h4>{{ p }}</h4>
+                                <a class="btn btn-default" onclick="del_pic('{{ p }}')">删除</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <script type="text/javascript">
+        var Editor;
+        $(function () {
+                Editor = editormd("editormd", {
+                    width: "100%",
+                    height: 300,
+                    syncScrolling: "single",
+                    path: "{{ url_for('static',filename='editormd/lib/') }}",
+                    imageUpload: false,
+                    autoFocus : false,
+                    toolbarIcons : function() {
+                    // Or return editormd.toolbarModes[name]; // full, simple, mini
+                    // Using "||" set icons align right.
+                    return ["undo", "redo", "|",  "info", "testIcon", "testIcon2", "file", "faicon", "||","testIcon"]
+                    },
+                    onload : function() {
+                            console.log('onload', this);
+                            this.unwatch();
+                        }
+                });
+        });
+    </script>
+
+    <script type="text/javascript">
+
+        function del_pic(pic){
+            $.ajax({
+                    type:'POST',
+                    url:'/admin/del_pic/',
+                    data:{filename:pic},
+                    dataType: "json",
+                    success: function (result) {
+                        console.log(result);
+                        if (result.resultCode == 200) {
+                            $("#"+pic.slice(0,-4)).remove();
+                            alert("SUCCESS");
+                        }
+                        else{
+                            alert("文件不存在！");
+                        }
+                    },
+                    error: function () {
+                        alert("ERROR");
+                    }
+                })
+
+        }
+
+        function add_pic() {
+                var formData=new FormData();
+                var f=document.getElementById('upload_input').files[0];
+                formData.append('img',f)
+                $.ajax({
+                    url:'/admin/add_pic/',
+                    data:formData,
+                    cache:false,
+                    processData:false,
+                    contentType:false,
+                    dataType: "json",
+                    type:'POST',
+                    success: function (result) {
+                        console.log(result);
+                        if (result.resultCode == 200) {
+                                alert("SUCCESS");
+
+                        }
+                    },
+                    error: function () {
+                        alert("ERROR");
+                    }
+                })
+
+            }
+    </script>
+</body>
+</html>

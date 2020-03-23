@@ -1,7 +1,29 @@
-Sheng-hua Zhong, Yuantian Wang, **Tongwei Ren**, Mingjie Zheng, Yan Liu, and Gangshan Wu. Steganographer detection via multi-scale embedding probability estimation. ACM Transactions on Multimedia Computing, Communications, and Applications, in press.
-Xu Sun, Yuan Zi, Tongwei Ren, Jinhui Tang and Gangshan Wu. Hierarchical visual relationship detection. Proceedings of ACM International Conference on Multimedia (MM'19), Nice, France, 2019.
+2020
+0002.jpg|Sheng-hua Zhong, Yuantian Wang, Tongwei Ren, Mingjie Zheng, Yan Liu, and Gangshan Wu. Steganographer detection via multi-scale embedding probability estimation. ACM Transactions on Multimedia Computing, Communications, and Applications, in press.$$1.mp4$$&&data.zip&&
+test.png|Xu Sun, Yuan Zi, Tongwei Ren, Jinhui Tang and Gangshan Wu. Hierarchical visual relationship detection. Proceedings of ACM International Conference on Multimedia (MM'19), Nice, France, 2019.
+2019
 Fan Yu, Haonan Wang, Tongwei Ren, Jinhui Tang and Gangshan Wu. Instance of interest detection. Proceedings of ACM International Conference on Multimedia (MM'19), Nice, France, 2019.
 Xin Tan, Chun Tao, Tongwei Ren, Jinhui Tang and Gangshan Wu. Crowd counting via multi-layer regression. Proceedings of ACM International Conference on Multimedia (MM'19), Nice, France, 2019.
 Tongwei Ren, and Ao Zhang. RGB-D salient object detection: a review. Chapter of book "RGB-D image analysis and processing", edited by Paul Rosin, Yu-Kun Lai, Ling Shao, and Yonghuai Liu, 2019.
-Xu Sun, **Tongwei Ren**, Yuan Zi and Gangshan Wu. Video visual relation detection via multi-modal feature fusing. Proceedings of ACM International Conference on Multimedia Grand Challenge (MM'19-GC), Nice, France, 2019. (MM 2019 VRU技术挑战赛冠军)
+Xu Sun, Tongwei Ren, Yuan Zi and Gangshan Wu. Video visual relation detection via multi-modal feature fusing. Proceedings of ACM International Conference on Multimedia Grand Challenge (MM'19-GC), Nice, France, 2019. (MM 2019 VRU技术挑战赛冠军)
 Wenhui Li, Anan Liu, Weizhi Nie, Dan Song, Yuqian Li, Weijie Wang, Shu Xiang, Heyu Zhou, Ngoc-Minh Bui, Yunchi Cen, Zenian Chen, Huy-Hoang Chung-Nguyen, Gia-Han Diep, Trong-Le Do, Eugeni L. Doubrovski, Anh-Duc Duong, Jo M. P. Geraedts, Haobin Guo, Trung-Hieu Hoang, Yichen Li, Xing Liu, Zishun Liu, Duc-Tuan Luu, Yunsheng Ma, Vinh-Tiep Nguyen, Jie Nie, Tongwei Ren, Mai-Khiem Tran, Son-Thanh Tran-Nguyen, Minh-Triet Tran, The-Anh Vu-Le, Charlie C. L. Wang, Shijie Wang, Gangshan Wu, Caifei Yang, Meng Yuan, Hao Zhai, Ao Zhang, Fan Zhang, Sicheng Zhao. Monocular image based 3D model retrieval. Eurographics Workshop on 3D Object Retrieval (EGW'19-3DOR), Genoa, Italy, 2019. (EG 2019 MI3DOR挑战赛并列第2)
+Yuantian Wang, Lei Huang, Tongwei Ren, Sheng-Hua Zhong, Han Gu, and Yan Liu. Insights of object proposal evaluation. Multimedia Tools and Applications (MTAP), 2019, 78(10):13111-13130.
+Jingfan Guo, Tongwei Ren, Lei Huang, and Jia Bei. Saliency detection on sampled images for tag ranking. Multimedia Systems (MMSJ), 2019, 25(1):35-47.
+2018
+Fan Yu, Xin Tan, Tongwei Ren, and Gangshan Wu. Human-centric visual relation segmentation using Mask R-CNN and VTransE. Proceedings of European Conference on Computer Vision Workshops on Person in Context (ECCVW'18-PIC), Munich, Germany, 2018. (ECCV 2018 PIC挑战赛冠军)
+Xu Sun, Yuantian Wang, Tongwei Ren, Zhi Liu, Zheng-Jun Zha, and Gangshan Wu. Object trajectory proposal via hierarchical volume grouping. Proceedings of ACM International Conference on Multimedia Retrieval (ICMR'18), Yokohama, Japan, 2018.
+Xingyu Liu, Jingfan Guo, Tongwei Ren, Yahong Han, Lei Huang, and Gangshan Wu. HeterStyle: a heterogeneous video style transfer application. ACM International Conference on Multimedia Demo (MM’18 Demo), Seoul, Korea, 2018.
+Yuantian Wang, Tongwei Ren, Sheng-Hua Zhong, Yan Liu, and Gangshan Wu. Adaptive saliency cuts. Multimedia Tools and Applications (MTAP), 77(17), 22213-22230, 2018.
+Yuqi Gao, Jitao Sang, Tongwei Ren, and Changsheng Xu. Hashtag-centric immersive search on social media. Proceedings of ACM International Conference on Multimedia (MM'17), Mountain View, USA, 2017.
+Xindi Shang, Tongwei Ren, Jingfan Guo, Hanwang Zhang, and Tat-Seng Chua. Video visual relation detection. Proceedings of ACM International Conference on Multimedia (MM'17), Mountain View, USA, 2017. (poster)
+Jingfan Guo, Tongwei Ren, Lei Huang, Xingyu Liu, Ming-Ming Cheng, and Gangshan Wu. Video salient object detection via cross-frame cellular automata. Proceedings of IEEE International Conference on Multimedia and Expo (ICME'17), Hong Kong, China, 2017. (poster)
+Jing Liu, Tongwei Ren, Yuantian Wang, Sheng-Hua Zhong, Jia Bei, and Shengchao Chen. Object proposal on RGB-D images via elastic edge boxes. Neurocomputing (NEUCOM), 2017, 236:134-146.
+Yuantian Wang, Lei Huang, Tongwei Ren, Sheng-Hua Zhong, Yan Liu, and Gangshan Wu. Object proposal via depth connectivity constrained grouping. Proceedings of Pacific Rim Conference on Multimedia (PCM'17), Harbin, China, 2017. (poster)
+Yuantian Wang, Lei Huang, Tongwei Ren, and Yunfei Zhang. Saliency cuts on RGB-D images. Proceedings of International Conference on Internet Multimedia Computing and Service (ICIMCS'17), Tsingtao, China, 2017. (poster)
+Before 2016
+Jingfan Guo, Tongwei Ren, and Jia Bei. Salient object detection for RGB-D image via saliency evolution. Proceedings of IEEE International Conference on Multimedia and Expo (ICME'16), Seattle, USA, 2016.
+Jing Liu, Tongwei Ren, Bing-Kun Bao, and Jia Bei. Depth-aware layered edge for object proposal. Proceedings of IEEE International Conference on Multimedia and Expo (ICME'16), Seattle, USA, 2016. (poster)
+Jing Liu, Tongwei Ren, and Jia Bei. Elastic edge boxes for object proposal on RGB-D images. Proceedings of International Conference on Multimedia Modeling (MMM'16), Miami, USA, 2016, 199-211.
+Yuqi Gao, Jingfan Guo, Tongwei Ren, and Jia Bei. Personal photo enhancement via saliency driven color transfer. Proceedings of International Conference on Internet Multimedia Computing and Service (ICIMCS'16), Xi'an, China, 2016. (poster)
+Tongwei Ren, Zhongyan Qiu, Yan Liu, Tong Yu, and Jia Bei. Soft-assigned bag of features for object tracking. Multimedia Systems (MMSJ), 2015, 21(2):189-205.
+Jingfan Guo, Tongwei Ren, Jia Bei, and Yujin Zhu. Salient object detection in RGB-D image based on saliency fusion and propagation. Proceedings of International Conference on Internet Multimedia Computing and Service (ICIMCS'15), Zhangjiajie, China, 2015.

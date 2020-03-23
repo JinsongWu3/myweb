@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport"
+		content="width=device-width,user-scalable=0,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>专利</title>
+
+	<!-- css -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}">
+	<link type="text/css" href="{{ url_for('static', filename='css/system.css') }}" rel="stylesheet">
+	<link type="text/css" href="{{ url_for('static', filename='css/default.css') }}" rel="stylesheet">
+	<link type="text/css" href="{{ url_for('static', filename='css/simplenews.css') }}" rel="stylesheet">
+	<link type="text/css" href="{{ url_for('static', filename='css/datepicker.css') }}" rel="stylesheet">
+	<link type="text/css" href="{{ url_for('static', filename='css/sudyNav.css') }}" rel="stylesheet">
+	<link type="text/css" href="{{ url_for('static', filename='css/extends.css') }}" rel="stylesheet" media="all">
+	<link type="text/css" href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet">
+	<link type="text/css" href="{{ url_for('static', filename='css/media.css') }}" rel="stylesheet">
+
+	<!-- js -->
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}" sudy-wp-context="" sudy-wp-siteid="2"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.sudy.wp.visitcount.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.datepicker.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/datepicker_lang_HK.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.sudyNav.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/extends.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.sudy.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.cookie.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/json2.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/rollSlide.js') }}"></script>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/share.js') }}"></script>
+</head>
+
+<body class="wp-main-page">
+	<!-- 导航栏 -->
+	<div class="navbar">
+		<div class="navbox">
+			<ul class="wp_nav">
+				<li class="nav-item">
+					<a href="index.html" target="_self">
+						<span class="item-name">首页</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="member.html" target="_self">
+						<span class="item-name">成员</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="paper.html" target="_self">
+						<span class="item-name">论文</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="contest.html" target="_self">
+						<span class="item-name">竞赛</span>
+					</a>
+				</li>
+				<li class="nav-item"  style="background-color: #60AEE1;">
+					<a href="patent.html" target="_self">
+						<span class="item-name">专利</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="project.html" target="_self">
+						<span class="item-name">项目</span>
+					</a>
+				</li>
+				<li class="nav-item" style="float: right">
+					<a href="#" target="_self">
+						<span class="item-name">English</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- 导航栏结束 -->
+	<!-- Logo开始 -->
+	<div class="logo-window">
+		<img class="left-logo" src="{{ url_for('static', filename='images/profile-magus.png') }}">
+		<img class="right-text" src="{{ url_for('static', filename='images/text.png') }}">
+	</div>
+	<!-- Logo结束 -->
+
+
+	<div class="wp-wrapper" id="container">
+		<div class="wp-inner clearfix">
+			<div class="post">
+				<div class="con">
+					<div id="wp_news_w8">
+						<ul class="news_list zdy-tj clearfix">
+							<li class="news n1 clearfix">
+								<div class="zdy-1">
+										<div class="main patent">
+											<style>
+												.news li {
+													list-style-type: disc;
+													margin-left: 20px;
+												}
+											</style>
+											{% if mode == "preview" %}
+											<div class="col-md-6 column">
+											<div class="text-title-no-border">
+												<h3>已授权(中)</h3>
+											</div>
+											<ul>
+												{% for element in content_zh_zl %}
+												<li>{{ element|safe }}</li>
+												{%  endfor %}
+											</ul>
+											<div class="text-title-no-border">
+												<h3>已受理(中)</h3>
+											</div>
+											<ul>
+												{% for element in content_zh_sq %}
+												<li>{{ element|safe }}</li>
+												{%  endfor %}
+											</ul>
+											</div>
+											<div class="col-md-6 column">
+											<div class="text-title-no-border">
+												<h3>已授权(英)</h3>
+											</div>
+											<ul>
+												{% for element in content_en_zl %}
+												<li>{{ element|safe }}</li>
+												{%  endfor %}
+											</ul>
+											<div class="text-title-no-border">
+												<h3>已受理(英)</h3>
+											</div>
+											<ul>
+												{% for element in content_en_sq %}
+												<li>{{ element|safe }}</li>
+												{%  endfor %}
+											</ul>
+											</div>
+
+											<div style="height:20px"></div>
+											<div class="col-md-4 column"></div>
+											<div class="col-md-2 column">
+												<button class="btn btn-primary" onclick=pub_patent()> 发布 </button>
+											</div>
+											<div class="col-md-2 column">
+												<button class="btn btn-primary" type="button" onclick="location.href='{{ url_for('.patent') }}'">返回编辑</button>
+											</div>
+
+											{% endif %}
+
+											{% if mode == "view" %}
+											<div class="text-title-no-border">
+												<h3>已授权</h3>
+											</div>
+											<ul>
+												{% for element in content_zl %}
+												<li>{{ element|safe }}</li>
+												{%  endfor %}
+											</ul>
+											<div class="text-title-no-border">
+												<h3>已受理</h3>
+											</div>
+											<ul>
+												{% for element in content_sq %}
+												<li>{{ element|safe }}</li>
+												{%  endfor %}
+											</ul>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br><br><br><br><br><br>
+	<!--//主体结束-->
+
+	<!--底部开始-->
+	<footer class="footer">
+		<span class="copyright">Copyright &copy; 2020.Magus All rights reserved.
+			<a class="copyright" href="http://www.beian.miit.gov.cn/">苏ICP备19024832号</a>
+		</span>
+	</footer>
+	<!--底部结束-->
+
+<!--	<script type="text/javascript" src="static/js/app.js"></script>-->
+	<script type="text/javascript" src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+	<script type="text/javascript">
+		$(function () {
+			// 初始化SDAPP
+			new SDAPP({
+				"menu": {
+					type: "aside,slide"
+				}
+			});
+		});
+	</script>
+
+	<script type="text/javascript" _ue_org_tagname="script">
+		$(function () {
+			$(".focuspc").sudyfocus({
+				p: 100,
+				zWidth: 1190,
+				zHeight: 554,
+				title: {
+					isAutoWidth: true,
+					active: true
+				},
+				text: {
+					active: false, // 是否显示文章简介        
+					isAutoHeight: false, // 简介背景自动高度      
+					href: false // 简介是否加文章链接 
+				},
+				response: true,
+				speed: 700,
+				pagination: false,
+				navigation: true,
+				isNavHover: false,
+				href: true,
+				effect: 'fade'
+			});
+			$(".focuswap").sudyfocus({
+				p: 101,
+				zWidth: 800,
+				zHeight: 400,
+				title: {
+					isAutoWidth: false,
+					active: true
+				},
+				text: {
+					active: false
+				},
+				response: true,
+				speed: 700,
+				pagination: false,
+				navigation: true,
+				isNavHover: false,
+				href: true,
+				effect: 'fade'
+			});
+		});
+	</script>
+
+	<script>
+	function pub_patent(url){
+			$.ajax({
+			//几个参数需要注意一下
+			type: "GET",//方法类型
+			dataType: "json",//预期服务器返回的数据类型
+			url: '/admin/pub_patent',//url
+			data: {name: 'submit'},
+			success: function (result) {
+				console.log(result);//打印服务端返回的数据(调试用)
+				if (result.resultCode == 200) {
+					alert("SUCCESS");
+				}
+				;
+			},
+			error: function () {
+				alert("ERROR！");
+			}
+		});
+
+	}
+	</script>
+</body>
+
+</html>

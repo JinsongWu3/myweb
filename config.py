@@ -7,10 +7,14 @@ class Config: ##config子类
     news_en = 'static/source/news_en.txt'
     competition_en = 'static/source/competition_zh.txt'
     competition_zh = 'static/source/competition_en.txt'
-    PATENT_ZH_ZL = 'static/source/patent_zh_zl.txt'
-    PATENT_ZH_SQ = 'static/source/patent_zh_sq.txt'
-    PATENT_EN_ZL = 'static/source/patent_en_zl.txt'
-    PATENT_EN_SQ = 'static/source/patent_en_sq.txt'
+    PATENT_ZH = 'static/source/patent_zh.txt'
+    PATENT_EN = 'static/source/patent_en.txt'
+    NEWS_ZH = 'static/source/news_zh.txt'
+    NEWS_EN = 'static/source/news_en.txt'
+    COMPETITION_ZH = 'static/source/competition_zh.txt'
+    COMPETITION_EN = 'static/source/competition_en.txt'
+    PAPER_ZH = 'static/source/paper_zh.txt'
+    PAPER_EN = 'static/source/paper_en.txt'
 
     @staticmethod
     def init_app(app):

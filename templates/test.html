@@ -28,7 +28,14 @@
                 <li> <a href="#">竞赛编辑</a></li>
                 <li> <a href="">合作方</a> </li>
 			</ul>
+
+            <div class="content">
+                {% for p in picdata%}
+                {{ p['ID'] }} |{{ p['path'] }}<br>
+                {% endfor %}
+            </div>
 		</div>
+
 	</div>
 </div>
 </body>
